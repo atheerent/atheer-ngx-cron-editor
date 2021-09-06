@@ -183,10 +183,10 @@ export class CronGenComponent implements OnInit, OnChanges {
     switch (this.activeTab) {
       case 'minutes':
         cron_parts = [
-          this.yearDefaultChar,
+          '*',
           this.weekDayDefaultChar,
           '*',
-          '1/1',
+          '0/1',
           `0/${this.state.minutes.minutes}`
         ];
 
@@ -353,16 +353,16 @@ export class CronGenComponent implements OnInit, OnChanges {
     // cron_parts[4] = hour
     // cron_parts[5] = minute
     // cron_parts[6] = second (quartz)
-    [5, 4, 1].forEach((idx) => {
-      if (cron_parts[idx] === '0/1') {
-        cron_parts[idx] = '*';
-      }
-    });
-    [2, 3].forEach((idx) => {
-      if (cron_parts[idx] === '1/1') {
-        cron_parts[idx] = '*';
-      }
-    });
+    // [5, 4, 1].forEach((idx) => {
+    //   if (cron_parts[idx] === '0/1') {
+    //     cron_parts[idx] = '*';
+    //   }
+    // });
+    // [2, 3].forEach((idx) => {
+    //   if (cron_parts[idx] === '1/1') {
+    //     cron_parts[idx] = '*';
+    //   }
+    // });
 
     // Generate final string
     this.cron = cron_parts.reverse().join(' ').trim();
@@ -409,7 +409,7 @@ export class CronGenComponent implements OnInit, OnChanges {
 
     const [seconds, minutes, hours, dayOfMonth, month, dayOfWeek] = cron.split(' ');
 
-    if (cron.match(/\d+ 0\/\d+ \* 1\/1 \* [\?\*] \*/)) {
+    if (cron.match(/\d+ 0\/\d+ 0\/1 \* \* [\?\*] \*/)) {
       this.activeTab = 'minutes';
 
       this.state.minutes.minutes = parseInt(minutes.substring(2));
