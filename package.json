@@ -8,7 +8,7 @@
 		"Håvard D. Johansen",
 		"Ryan Morlok"
 	],
-	"version": "0.4.19",
+	"version": "0.4.20",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
