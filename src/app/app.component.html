@@ -21,6 +21,7 @@
             [(cron)]="cronExpression"
             [disabled]="isCronDisabled"
             [options]="cronOptions"
+            (onTabChange)="customOnTabChange($event)"
         >Cron here...</cron-editor>
       </div>
       <div class="card-footer text-center">

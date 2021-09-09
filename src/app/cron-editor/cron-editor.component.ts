@@ -1,6 +1,6 @@
 import {Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter} from '@angular/core';
 
-import {CronOptions} from './CronOptions';
+import {CronOptions, CronEditorLables} from './CronOptions';
 import {Days, MonthWeeks, Months, CronFlavor} from './enums';
 
 @Component({
@@ -30,6 +30,9 @@ export class CronGenComponent implements OnInit, OnChanges {
 
   // the name is an Angular convention, @Input variable name + "Change" suffix
   @Output() cronChange = new EventEmitter();
+
+  // the tab change event to the parent container
+  @Output() onTabChange = new EventEmitter();
 
   public selectOptions = this.getSelectOptions();
   public state: any;
@@ -80,6 +83,7 @@ export class CronGenComponent implements OnInit, OnChanges {
   public set selectedTabIndex(val: number) {
     this._selectedTabIndex = val;
     this._activeTab = this._tabsList()[val];
+    this.onTabChange.emit(this._activeTab);
     this.regenerateCron();
   }
 
@@ -114,6 +118,7 @@ export class CronGenComponent implements OnInit, OnChanges {
   }
 
   public async ngOnInit() {
+    this.setCustomLables();
     // This will be augmented based on the parsed cron
     this.state = this.getDefaultState();
     this.handleModelChange(this.cron);
@@ -135,6 +140,64 @@ export class CronGenComponent implements OnInit, OnChanges {
     }
   }
 
+  public setCustomLables() {
+    const defaultLables: CronEditorLables =  {
+      minutesTab: "Minutes",
+      hourlyTab: "Hourly",
+      dailyTab: "Daily",
+      weeklyTab: "Weekly",
+      monthlyTab: "Monthly",
+      yearlyTab: "Yearly",
+      advancedTab: "Advanced",
+    
+      every: "Every",
+    
+      // minutes tab
+      minutes: "minutes(s)",
+      onSecond: "on second",
+    
+      // hourly tab
+      hoursOnMinute: "hour(s) on minute",
+      andSecond: "and second",
+    
+      // daily tab
+      daysAt: "day(s) at",
+      everyWorkingDayAt: "Every working day at ",
+    
+      // weekly tab
+      monday: "Monday",
+      tuesday: "Tuesday",
+      wednesday: "Wednesday",
+      thursday: "Thurdsay",
+      friday: "Friday",
+      saturday: "Saturday",
+      sunday: "Sunday",
+      at: "at",
+    
+      // monthly tab
+      OnThe: "On the",
+      nthDay: " $$day",
+      ofEvery: "of every",
+      monthsAt: "month(s) at",
+      firstWeekday: "First Weekday",
+      lastDay: "Last Day",
+      lastWeekday: "Last Weekday",
+      days: Days,
+      monthWeeks: MonthWeeks,
+      months: Months,
+      
+      // yearly
+      onThe: "on the",
+      of: "of",
+    
+      // advanced
+      advanced: "Advanced",
+      cronExpression: "Cron Expression"
+    };
+
+    this.options.customLables = { ...defaultLables, ...this.options.customLables };
+  }
+
   public setActiveTab(tab: string, event: any) {
     event; // makes the compiler happy
     if (!this.disabled) {
@@ -144,26 +207,26 @@ export class CronGenComponent implements OnInit, OnChanges {
   }
 
   public dayDisplay(day: string): string {
-    return Days[day];
+    return this.options.customLables.days[day];
   }
 
   public monthWeekDisplay(monthWeekNumber: number): string {
-    return MonthWeeks[monthWeekNumber];
+    return this.options.customLables.monthWeeks[monthWeekNumber];
   }
 
   public monthDisplay(month: number): string {
-    return Months[month];
+    return this.options.customLables.months[month];
   }
 
   public monthDayDisplay(month: string): string {
     if (month === 'L') {
-      return 'Last Day';
+      return this.options.customLables.lastDay;
     } else if (month === 'LW') {
-      return 'Last Weekday';
+      return this.options.customLables.lastWeekday;
     } else if (month === '1W') {
-      return 'First Weekday';
+      return this.options.customLables.firstWeekday;
     } else {
-      return `${month}${this.getOrdinalSuffix(month)} day`;
+      return `${month}${this.getOrdinalSuffix(month)}${this.options.customLables.nthDay}`;
     }
   }
 

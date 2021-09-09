@@ -3,9 +3,10 @@
   <div class="card-header">
     <!-- Tabs -->
     <mat-tab-group [(selectedIndex)]="selectedTabIndex">
-      <mat-tab label="Minutes" *ngIf="!options.hideMinutesTab">
+
+      <mat-tab [label]="options.customLables.minutesTab" *ngIf="!options.hideMinutesTab">
         <div class="">
-          Every
+          {{ options.customLables.every }}
           <mat-form-field>
             <mat-select class="minutes" [disabled]="disabled || activeTab !== 'minutes'" (selectionChange)="regenerateCron()"
               [(ngModel)]="state.minutes.minutes" [ngClass]="options.formSelectClass">
@@ -13,8 +14,8 @@
                 {{minute}}
               </mat-option>
             </mat-select>
-          </mat-form-field>minute(s)
-          <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">on second</span>
+          </mat-form-field>{{ options.customLables.minutes }}
+          <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">{{ options.customLables.onSecond }}</span>
           <mat-form-field *ngIf="!options.hideSeconds && isCronFlavorQuartz">
             <mat-select class="seconds" [disabled]="disabled || activeTab !== 'minutes'" (selectionChange)="regenerateCron()"
               [(ngModel)]="state.minutes.seconds" [ngClass]="options.formSelectClass">
@@ -25,9 +26,10 @@
           </mat-form-field>
         </div>
       </mat-tab>
-      <mat-tab label="Hourly" *ngIf="!options.hideHourlyTab">
+
+      <mat-tab [label]="options.customLables.hourlyTab" *ngIf="!options.hideHourlyTab">
         <div class="">
-          Every
+          {{ options.customLables.every }}
           <mat-form-field>
             <mat-select class="hours" [disabled]="disabled || activeTab !== 'hourly'" (selectionChange)="regenerateCron()"
               [(ngModel)]="state.hourly.hours" [ngClass]="options.formSelectClass">
@@ -35,7 +37,7 @@
                 {{hour}}
               </mat-option>
             </mat-select>
-          </mat-form-field> hour(s) on minute
+          </mat-form-field> {{ options.customLables.hoursOnMinute }}
           <mat-form-field>
             <mat-select class="minutes" [disabled]="disabled || activeTab !== 'hourly'" (selectionChange)="regenerateCron()"
               [(ngModel)]="state.hourly.minutes" [ngClass]="options.formSelectClass">
@@ -44,7 +46,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">and second</span>
+          <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">{{ options.customLables.andSecond }}</span>
           <mat-form-field *ngIf="!options.hideSeconds && isCronFlavorQuartz">
             <mat-select class="seconds" [disabled]="disabled || activeTab !== 'hourly'" (selectionChange)="regenerateCron()"
               [(ngModel)]="state.hourly.seconds" [ngClass]="options.formSelectClass">
@@ -55,14 +57,15 @@
           </mat-form-field>
         </div>
       </mat-tab>
-      <mat-tab label="Daily" *ngIf="!options.hideDailyTab">
+
+      <mat-tab [label]="options.customLables.dailyTab" *ngIf="!options.hideDailyTab">
         <div class="form-group">
           <mat-radio-group [(ngModel)]="state.daily.subTab">
             <mat-radio-button name="daily-radio" value="everyDays" [disabled]="disabled" (change)="regenerateCron()"
               [ngClass]="state.formRadioClass" checked="checked">
             </mat-radio-button>
           </mat-radio-group>
-          <label>Every
+          <label>{{ options.customLables.every }}
             <mat-form-field>
               <mat-select class="days" [disabled]="disabled || activeTab !== 'daily' || state.daily.subTab !== 'everyDays'"
                 (selectionChange)="regenerateCron()" [(ngModel)]="state.daily.everyDays.days" [ngClass]="options.formSelectClass">
@@ -72,7 +75,7 @@
               </mat-select>
             </mat-form-field>
           </label>&nbsp;
-          <label>day(s) at
+          <label>{{ options.customLables.daysAt }}
             <cron-time-picker [disabled]="disabled || activeTab !== 'daily' || state.daily.subTab !== 'everyDays'"
               (onChange)="regenerateCron()" [(model)]="state.daily.everyDays" [selectClass]="options.formSelectClass"
               [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds|| !isCronFlavorQuartz">
@@ -86,48 +89,49 @@
               [ngClass]="state.formRadioClass">
             </mat-radio-button>
           </mat-radio-group>
-          Every working day at
+          {{ options.customLables.everyWorkingDayAt }}
           <cron-time-picker [disabled]="disabled || activeTab !== 'daily' || state.daily.subTab !== 'everyWeekDay'"
             (onChange)="regenerateCron()" [(model)]="state.daily.everyWeekDay" [selectClass]="options.formSelectClass"
             [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
           </cron-time-picker>
         </div>
       </mat-tab>
-      <mat-tab label="Weekly" *ngIf="!options.hideWeeklyTab">
+
+      <mat-tab [label]="options.customLables.weeklyTab" *ngIf="!options.hideWeeklyTab">
         <div class="form-group">
           <div class="row">
             <div class="col-sm-6">
               <mat-checkbox [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()" [(ngModel)]="state.weekly.MON"
-                [ngClass]="options.formCheckboxClass"> Monday</mat-checkbox>
+                [ngClass]="options.formCheckboxClass"> {{ options.customLables.monday }}</mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()" [(ngModel)]="state.weekly.TUE"
-                [ngClass]="options.formCheckboxClass"> Tuesday</mat-checkbox>
+                [ngClass]="options.formCheckboxClass"> {{ options.customLables.tuesday }}</mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()" [(ngModel)]="state.weekly.WED"
-                [ngClass]="options.formCheckboxClass"> Wednesday</mat-checkbox>
+                [ngClass]="options.formCheckboxClass"> {{ options.customLables.wednesday }}</mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()" [(ngModel)]="state.weekly.THU"
-                [ngClass]="options.formCheckboxClass"> Thursday </mat-checkbox>
+                [ngClass]="options.formCheckboxClass"> {{ options.customLables.thursday }} </mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()" [(ngModel)]="state.weekly.FRI"
-                [ngClass]="options.formCheckboxClass"> Friday</mat-checkbox>
+                [ngClass]="options.formCheckboxClass"> {{ options.customLables.friday }}</mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox type="checkbox" [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()"
-                [(ngModel)]="state.weekly.SAT" [ngClass]="options.formCheckboxClass"> Saturday</mat-checkbox>
+                [(ngModel)]="state.weekly.SAT" [ngClass]="options.formCheckboxClass"> {{ options.customLables.saturday }}</mat-checkbox>
             </div>
             <div class="col-sm-6">
               <mat-checkbox type="checkbox" [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron()"
-                [(ngModel)]="state.weekly.SUN" [ngClass]="options.formCheckboxClass"> Sunday</mat-checkbox>
+                [(ngModel)]="state.weekly.SUN" [ngClass]="options.formCheckboxClass"> {{ options.customLables.sunday }}</mat-checkbox>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              at
+              {{ options.customLables.at }}
               <cron-time-picker [disabled]="disabled || activeTab !== 'weekly'" (onChange)="regenerateCron()" [(model)]="state.weekly"
                 [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds|| !isCronFlavorQuartz">
               </cron-time-picker>
@@ -136,14 +140,15 @@
         </div>
 
       </mat-tab>
-      <mat-tab label="Monthly" *ngIf="!options.hideMonthlyTab">
+
+      <mat-tab [label]="options.customLables.monthlyTab" *ngIf="!options.hideMonthlyTab">
         <div class="form-group">
           <mat-radio-group [(ngModel)]="state.monthly.subTab">
             <mat-radio-button name="monthly-radio" value="specificDay" [disabled]="disabled" (change)="regenerateCron()"
               [ngClass]="state.formRadioClass">
             </mat-radio-button>
           </mat-radio-group>
-          On the
+          {{ options.customLables.OnThe }}
           <mat-form-field *ngIf="isCronFlavorQuartz">
             <mat-select class="month-days" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.monthly.specificDay.day" [ngClass]="options.formSelectClass">
@@ -162,7 +167,7 @@
             </mat-select>
           </mat-form-field>
 
-          of every
+          {{ options.customLables.ofEvery }}
           <mat-form-field>
             <mat-select class="months-small" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.monthly.specificDay.months" [ngClass]="options.formSelectClass">
@@ -172,7 +177,7 @@
             </mat-select>
           </mat-form-field>
 
-          month(s) at
+          {{ options.customLables.monthsAt }}
           <cron-time-picker [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'"
             (onChange)="regenerateCron()" [(model)]="state.monthly.specificDay" [selectClass]="options.formSelectClass"
             [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
@@ -184,7 +189,7 @@
               [ngClass]="state.formRadioClass">
             </mat-radio-button>
           </mat-radio-group>
-          On the
+          {{ options.customLables.OnThe }}
           <mat-form-field>
             <mat-select class="day-order-in-month" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificWeekDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.monthly.specificWeekDay.monthWeek" [ngClass]="options.formSelectClass">
@@ -201,7 +206,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          of every
+          {{ options.customLables.ofEvery }}
           <mat-form-field>
             <mat-select class="months-small" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificWeekDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.monthly.specificWeekDay.months" [ngClass]="options.formSelectClass">
@@ -210,21 +215,22 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          month(s) at
+          {{ options.customLables.monthsAt }}
           <cron-time-picker [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificWeekDay'"
             (onChange)="regenerateCron()" [(model)]="state.monthly.specificWeekDay" [selectClass]="options.formSelectClass"
             [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
           </cron-time-picker>
         </div>
       </mat-tab>
-      <mat-tab label="Yearly" *ngIf="!options.hideYearlyTab">
+
+      <mat-tab [label]="options.customLables.yearlyTab" *ngIf="!options.hideYearlyTab">
         <div class="form-group">
           <mat-radio-group [(ngModel)]="state.yearly.subTab">
             <mat-radio-button name="yearly-radio" value="specificMonthDay" [disabled]="disabled" (change)="regenerateCron()"
               [ngClass]="state.formRadioClass">
             </mat-radio-button>
           </mat-radio-group>
-          Every
+          {{ options.customLables.every }}
           <mat-form-field>
             <mat-select class="months" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.yearly.specificMonthDay.month" [ngClass]="options.formSelectClass">
@@ -233,7 +239,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          on the
+          {{ options.customLables.onThe }}
           <mat-form-field *ngIf="isCronFlavorQuartz" class="month-days">
             <mat-select [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.yearly.specificMonthDay.day" [ngClass]="options.formSelectClass">
@@ -250,7 +256,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          at
+          {{ options.customLables.at }}
           <cron-time-picker [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
             (onChange)="regenerateCron()" [(model)]="state.yearly.specificMonthDay" [selectClass]="options.formSelectClass"
             [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
@@ -262,7 +268,7 @@
               [ngClass]="state.formRadioClass">
             </mat-radio-button>
           </mat-radio-group>
-          On the
+          {{ options.customLables.OnThe }}
           <mat-form-field>
             <mat-select class="day-order-in-month" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthWeek'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.yearly.specificMonthWeek.monthWeek" [ngClass]="options.formSelectClass">
@@ -279,7 +285,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          of
+          {{ options.customLables.of }}
           <mat-form-field>
             <mat-select class="months" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthWeek'"
               (selectionChange)="regenerateCron()" [(ngModel)]="state.yearly.specificMonthWeek.month" [ngClass]="options.formSelectClass">
@@ -288,15 +294,16 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          at
+          {{ options.customLables.at }}
           <cron-time-picker [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthWeek'"
             (onChange)="regenerateCron()" [(model)]="state.yearly.specificMonthWeek" [selectClass]="options.formSelectClass"
             [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
           </cron-time-picker>
         </div>
       </mat-tab>
-      <mat-tab label="Advanced" *ngIf="!options.hideAdvancedTab">
-        Cron Expression
+
+      <mat-tab [label]="options.customLables.advancedTab" *ngIf="!options.hideAdvancedTab">
+        {{ options.customLables.cronExpression }}
         <mat-form-field>
           <input matInput type="text" class="advanced-cron-editor-input" ng-disabled="disabled || activeTab !== 'advanced'"
             (change)="regenerateCron()" [(ngModel)]="state.advanced.expression" [ngClass]="options.formInputClass">

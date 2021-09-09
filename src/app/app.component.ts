@@ -63,6 +63,10 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  customOnTabChange(event) {
+    console.log(event);
+  }
+
   ngOnDestroy(): void {
     if (this.routeQueryParamsSubscription) {
       this.routeQueryParamsSubscription.unsubscribe();
