@@ -176,7 +176,7 @@ export class CronGenComponent implements OnInit, OnChanges {
     
       // monthly tab
       OnThe: "On the",
-      nthDay: " $$day",
+      nthDay: " day",
       ofEvery: "of every",
       monthsAt: "month(s) at",
       firstWeekday: "First Weekday",
@@ -246,11 +246,12 @@ export class CronGenComponent implements OnInit, OnChanges {
     switch (this.activeTab) {
       case 'minutes':
         cron_parts = [
-          '*',
-          this.weekDayDefaultChar,
-          '*',
-          '0/1',
-          `0/${this.state.minutes.minutes}`
+            '*',
+            '*',
+            '*',
+            this.weekDayDefaultChar,
+            '0/1',
+            `0/${this.state.minutes.minutes}`
         ];
 
         if (this.isCronFlavorQuartz) {
@@ -472,7 +473,7 @@ export class CronGenComponent implements OnInit, OnChanges {
 
     const [seconds, minutes, hours, dayOfMonth, month, dayOfWeek] = cron.split(' ');
 
-    if (cron.match(/\d+ 0\/\d+ 0\/1 \* \* [\?\*] \*/)) {
+    if (cron.match(/\d+ 0\/\d+ 0\/1 [\?\*] \* \* \*/)) {
       this.activeTab = 'minutes';
 
       this.state.minutes.minutes = parseInt(minutes.substring(2));
