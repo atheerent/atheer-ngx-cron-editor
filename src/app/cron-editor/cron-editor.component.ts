@@ -384,8 +384,7 @@ export class CronGenComponent implements OnInit, OnChanges {
           case 'specificMonthWeek':
             cron_parts = [
               this.yearDefaultChar,
-              this.state.yearly.specificMonthWeek.monthWeek,
-              this.state.yearly.specificMonthWeek.day,
+              this.state.yearly.specificMonthWeek.day + '' + this.state.yearly.specificMonthWeek.monthWeek,
               this.state.yearly.specificMonthWeek.month,
               this.monthDayDefaultChar,
               this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType),
