@@ -1,5 +1,5 @@
 {
-  "name": "@vishnutk/ngx-cron-editor",
+  "name": "@atheerent/atheer-ngx-cron-editor",
   "description": "A cron expression generator for Angular 9+",
   "author": "Ryan Morlok",
   "contributors": [
@@ -8,19 +8,20 @@
     "Håvard D. Johansen",
     "Ryan Morlok"
   ],
-  "version": "0.4.31",
+  "version": "0.5.1",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vishnutk/ngx-cron-editor.git"
+    "url": "git://github.com/atheerent/atheer-ngx-cron-editor.git"
   },
+
   "bugs": {
-    "url": "https://github.com/vishnutk/ngx-cron-editor/issues"
+    "url": "https://github.com/atheerent/atheer-ngx-cron-editor/issues"
   },
-  "homepage": "https://github.com/vishnutk/ngx-cron-editor",
+  "homepage": "https://github.com/atheerent/atheer-ngx-cron-editor",
   "keywords": [
     "angular",
     "cron",
@@ -98,15 +99,15 @@
       "entryFile": "index.ts"
     }
   },
-  "main": "bundles/ngx-cron-editor.umd.js",
-  "module": "fesm5/ngx-cron-editor.js",
-  "es2015": "fesm2015/ngx-cron-editor.js",
-  "esm5": "esm5/ngx-cron-editor.js",
-  "esm2015": "esm2015/ngx-cron-editor.js",
-  "fesm5": "fesm5/ngx-cron-editor.js",
-  "fesm2015": "fesm2015/ngx-cron-editor.js",
-  "typings": "ngx-cron-editor.d.ts",
-  "metadata": "ngx-cron-editor.metadata.json",
+  "main": "bundles/atheer-ngx-cron-editor.umd.js",
+  "module": "fesm5/atheer-ngx-cron-editor.js",
+  "es2015": "fesm2015/atheer-ngx-cron-editor.js",
+  "esm5": "esm5/atheer-ngx-cron-editor.js",
+  "esm2015": "esm2015/atheer-ngx-cron-editor.js",
+  "fesm5": "fesm5/atheer-ngx-cron-editor.js",
+  "fesm2015": "fesm2015/atheer-ngx-cron-editor.js",
+  "typings": "atheer-ngx-cron-editor.d.ts",
+  "metadata": "atheer-ngx-cron-editor.metadata.json",
   "sideEffects": false,
   "directories": {
     "doc": "docs"
