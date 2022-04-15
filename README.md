@@ -84,7 +84,7 @@ export class MyComponent {
 }
 ```
 
-## ZapInfo Developer Notes
+## Atheer Developer Notes
 
 Internally, we use github for package management.
 
@@ -96,8 +96,10 @@ npm login --registry=https://npm.pkg.github.com/
 
 Then publish the package:
 
+update the version in package.json
+
 ```
-npm publish
+npm run publish
 ```
 
 ## License:
